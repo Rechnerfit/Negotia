@@ -1,0 +1,290 @@
+<!DOCTYPE html><html><head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/Negotia/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Negotia is a local-first task app with optional encrypted Firebase sync.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Negotia">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <title>Negotia</title>
+  <link rel="manifest" href="manifest.json">
+  
+  
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+  
+  <style id="splash-screen-style">
+    html {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      background-color: #FFFFFF;
+          background-size: 100% 100%;
+    }
+
+    .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .contain {
+      display:block;
+      width:100%; height:100%;
+      object-fit: contain;
+    }
+
+    .stretch {
+      display:block;
+      width:100%; height:100%;
+    }
+
+    .cover {
+      display:block;
+      width:100%; height:100%;
+      object-fit: cover;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      -ms-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+    }
+
+    .bottomLeft {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .bottomRight {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #14171B;
+          }
+    }
+  </style>
+  <script id="splash-screen-script">
+    function removeSplashFromWeb() {
+      document.getElementById("splash")?.remove();
+      document.getElementById("splash-branding")?.remove();
+      document.body.style.background = "transparent";
+    }
+  </script>
+  <style>
+    #flutter-load-fallback {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: #14171B;
+      color: #F8FAFC;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    #flutter-load-fallback[data-visible="true"] {
+      display: flex;
+    }
+
+    #flutter-load-fallback .message {
+      max-width: 640px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 12px;
+      padding: 22px;
+      background: rgba(255, 255, 255, .06);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, .28);
+    }
+
+    #flutter-load-fallback h1 {
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+
+    #flutter-load-fallback p {
+      margin: 10px 0 0;
+      color: #CBD5E1;
+      line-height: 1.5;
+    }
+
+    #flutter-load-fallback code {
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+  </style>
+  <script>
+    (function () {
+      var fallbackTimer;
+      var fallbackVisible = false;
+
+      function isFileProtocol() {
+        return window.location.protocol === 'file:';
+      }
+
+      function flutterHasStarted() {
+        return Boolean(
+          document.querySelector('flutter-view') ||
+          document.querySelector('flt-glass-pane') ||
+          document.querySelector('flt-scene-host')
+        );
+      }
+
+      function hideFallback() {
+        var fallback = document.getElementById('flutter-load-fallback');
+        if (fallback) fallback.removeAttribute('data-visible');
+        fallbackVisible = false;
+        window.clearTimeout(fallbackTimer);
+      }
+
+      function setFallbackText(reason, hint, englishHint) {
+        var detail = document.getElementById('flutter-load-fallback-detail');
+        var hintElement = document.getElementById('flutter-load-fallback-hint');
+        var englishElement = document.getElementById('flutter-load-fallback-hint-en');
+        if (detail && reason) detail.textContent = reason;
+        if (hintElement && hint) hintElement.textContent = hint;
+        if (englishElement && englishHint) englishElement.textContent = englishHint;
+      }
+
+      function showFallback(reason, hint, englishHint) {
+        if (flutterHasStarted()) return;
+        var fallback = document.getElementById('flutter-load-fallback');
+        if (!fallback) return;
+        setFallbackText(reason, hint, englishHint);
+        fallback.setAttribute('data-visible', 'true');
+        fallbackVisible = true;
+      }
+
+      window.__showNegotiaFlutterFallback = showFallback;
+      window.addEventListener('flutter-first-frame', hideFallback);
+      window.addEventListener('error', function (event) {
+        var target = event.target;
+        if (!target || target === window) {
+          if (!fallbackVisible && event.message) {
+            showFallback(
+              'JavaScript-Fehler beim Start: ' + event.message,
+              'Pruefe die Browser-Konsole und lade den kompletten Ordner ueber HTTP, nicht einzelne Dateien.',
+              'Check the browser console and serve the complete folder over HTTP, not individual files.'
+            );
+          }
+          return;
+        }
+        var url = target.src || target.href;
+        if (!url) return;
+        if (isFileProtocol()) {
+          showFallback(
+            'Du hast index.html direkt als Datei geoeffnet. Flutter Web braucht einen HTTP-Server.',
+            'Starte den Build-Ordner mit .\\Deploy\\scripts\\serve_build_web.ps1 oder die Deploy-Struktur mit .\\Deploy\\scripts\\serve_deploy.ps1.',
+            'Do not open index.html directly. Serve the folder over HTTP so Flutter can load JavaScript, CanvasKit and assets.'
+          );
+          return;
+        }
+        showFallback(
+          'Eine benoetigte Web-Datei konnte nicht geladen werden: ' + url,
+          'Pruefe, dass der komplette Inhalt von Deploy/public im Webroot liegt und die App unter /Apps/Negotia/ erreichbar ist.',
+          'A required web file did not load. Verify that the complete Deploy/public contents are served from the web root.'
+        );
+      }, true);
+      window.addEventListener('unhandledrejection', function (event) {
+        if (flutterHasStarted()) return;
+        var reason = event.reason && (event.reason.message || event.reason.toString());
+        showFallback(
+          reason ? 'Flutter konnte nicht initialisiert werden: ' + reason : 'Flutter konnte nicht initialisiert werden.',
+          'Pruefe Base-Href, MIME-Typen fuer .wasm und ob alle Dateien aus dem Build hochgeladen wurden.',
+          'Flutter did not initialize. Check base href, .wasm MIME types, and whether every generated file was uploaded.'
+        );
+      });
+
+      fallbackTimer = window.setTimeout(function () {
+        if (isFileProtocol()) {
+          showFallback(
+            'Du hast index.html direkt als Datei geoeffnet. Flutter Web braucht einen HTTP-Server.',
+            'Starte den Build-Ordner mit .\\Deploy\\scripts\\serve_build_web.ps1 oder die Deploy-Struktur mit .\\Deploy\\scripts\\serve_deploy.ps1.',
+            'Do not open index.html directly. Serve the folder over HTTP so Flutter can load JavaScript, CanvasKit and assets.'
+          );
+          return;
+        }
+        showFallback(
+          'Die Web-App wurde ueber HTTP geladen, aber Flutter hat noch kein erstes Frame gemeldet.',
+          'Pruefe die Browser-Konsole, Base-Href und ob flutter_bootstrap.js, main.dart.js, assets/ und canvaskit/ vom selben Deploy-Pfad ausgeliefert werden.',
+          'The page is served over HTTP, but Flutter has not rendered yet. Check the console, base href, and uploaded build files.'
+        );
+      }, isFileProtocol() ? 1200 : 20000);
+    })();
+  </script>
+</head>
+<body>
+  <picture id="splash">
+      <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
+      <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
+      <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
+  </picture>
+  
+  
+  <!--
+    You can customize the "flutter_bootstrap.js" script.
+    This is useful to provide a custom configuration to the Flutter loader
+    or to give the user feedback during the initialization process.
+
+    For more details:
+    * https://docs.flutter.dev/platform-integration/web/initialization
+  -->
+  <div id="flutter-load-fallback" role="status" aria-live="polite">
+    <div class="message">
+      <h1>Negotia konnte nicht gestartet werden.</h1>
+      <p id="flutter-load-fallback-detail">
+        Die Web-App hat nicht alle benötigten Dateien geladen.
+      </p>
+      <p id="flutter-load-fallback-hint">
+        Pruefe, dass der komplette Web-Build ueber HTTP ausgeliefert wird.
+      </p>
+      <p id="flutter-load-fallback-hint-en">
+        English: Serve the complete web build over HTTP so Flutter can load
+        JavaScript, CanvasKit and assets correctly.
+      </p>
+    </div>
+  </div>
+  <script
+    src="flutter_bootstrap.js"
+    async=""
+    onerror="window.__showNegotiaFlutterFallback && window.__showNegotiaFlutterFallback('flutter_bootstrap.js konnte nicht geladen werden. Prüfe Base-Href und Server-Pfad.')"
+  ></script>
+
+
+</body></html>
